@@ -1,0 +1,13 @@
+.main-container(layout="vertical")
+  div(flex layout="horizontal" layout-sm="horizontal")
+    main(flex)
+      md-toolbar
+        .md-toolbar-tools.extra
+          span.md-flex.settings-header Settings
+      md-content.md-padding.extra
+        form
+          div(class="row")
+            md-text-float.long(label="What do people call you?" ng-model="user.known_as")
+            md-text-float.long(label="Slogan" ng-model="user.slogan")
+            .actions
+              md-button.md-raised.md-primary(ng-click="update()") Save Changes

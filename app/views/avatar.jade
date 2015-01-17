@@ -1,0 +1,4 @@
+.bling
+  i.fa(ng-repeat="($id, b) in user.bling" ng-class="b.icon" ng-style="{color: b.color}")
+img(ng-src="{{user.picture}}" ng-class="{active: me}")
+md-tooltip(visible="showTooltip") {{user.name}} aka &ldquo;{{user.known_as}}&rdquo;

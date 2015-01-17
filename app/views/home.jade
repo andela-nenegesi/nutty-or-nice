@@ -1,0 +1,8 @@
+md-content.md-default-theme.no-bg(layout="column" layout-fill)
+  md-toolbar#home-toolbar
+    .md-toolbar-tools
+      span.title NuttyOrNice?
+      span(flex layout="row" layout-align="end center" ng-if="currentUser")
+        input#name-search(ng-show="searching" ng-model="search.name" placeholder="Name" style="margin-right: -48px")
+        md-button(ng-click="showBottomSheet($event)")
+          i.fa.fa-ellipsis-v
