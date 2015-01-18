@@ -1,14 +1,4 @@
 .main-container(layout="vertical")
-  div(flex layout="horizontal" layout-sm="horizontal")
-    main(flex)
-      md-toolbar
-        .md-toolbar-tools.extra
-          span.md-flex.settings-header Welcome to Skilltree
-      md-content.md-padding.extra
-        h3 Please enter the invite code provided to you by the administrator
-        form(action="/join")
-          div(class="row")
-            input(label="Code" name="code")
-            input(type="hidden" name="uid" value="{{currentUser.uid}}")
-            .actions
-              md-button.md-raised.md-primary(type="submit") Submit
+  main(flex)
+    h3 Joining a relationship...
+    md-progress-circular(class="md-accent" md-mode="indeterminate")

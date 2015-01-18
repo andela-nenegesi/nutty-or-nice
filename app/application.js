@@ -9,6 +9,7 @@ require('./js/services/authentication.js');
 require('./js/services/authorization.js');
 require('./js/services/profiles.js');
 require('./js/services/refs.js');
+require('./js/services/relationships.js');
 require('./js/services/toast.js');
 require('./js/services/users.js');
 
@@ -19,6 +20,7 @@ require('./js/directives/levels.js');
 /* load controllers */
 require('./js/controllers/bottom-sheet.js');
 require('./js/controllers/home.js');
+require('./js/controllers/join.js');
 require('./js/controllers/login.js');
 
 window.NuttyOrNice = angular.module("nuttyOrNice", [
@@ -81,8 +83,9 @@ NuttyOrNice.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/admin/users.html',
       controller: 'UsersCtrl'
     })
-    .state('join', {
-      url: '/join',
-      templateUrl: 'views/join.html'
+    .state('invites', {
+      url: '/invites/:relationshipId',
+      templateUrl: 'views/join.html',
+      controller: 'JoinCtrl'
     })
 }]);

@@ -8,6 +8,7 @@ angular.module('nuttyOrNice.services')
       // so that they are defined just once, not scattered throughout
       return {
         root: rootRef,
+        relationships: rootRef.child('relationships'),
         users: rootRef.child('users'),
         isAdmin: function() {
           var auth = rootRef.getAuth()?rootRef.getAuth().auth:false;

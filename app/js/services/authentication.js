@@ -7,7 +7,13 @@ angular.module('nuttyOrNice.services')
         login: function(cb) {
           var options = { remember: true, scope: "email" };
           Refs.root.authWithOAuthPopup("google", function(error, authData) {
-
+            console.log('login callback');
+            if(!error && cb) {
+              cb();
+            }
+            else {
+              console.log('error', error);
+            }
           }, options);
         },
 

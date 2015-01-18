@@ -11,6 +11,8 @@ var FirebaseTokenGenerator = require("firebase-token-generator"),
   needle = require('needle'),
   app = express(),
   bodyParser = require('body-parser'),
+  Mailgun = require('mailgun').Mailgun,
+  mg = new Mailgun(config.mailgun.api_key),
   rootRefUrl;
 
 if(env === 'production') {
@@ -69,48 +71,36 @@ function run(appdir) {
   }));
 
 
-  app.get('/join', function(req, res) {
+  app.get('/invite', function(req, res) {
+    console.log('invite API');
+    var recipient = req.query.email;
+    var sender = req.query.name;
     var uid = req.query.uid;
-    var code = req.query.code;
 
-    rootRef.child('organizations').child('andela').child('invites').child(code).once('value', function(inviteSnap) {
-      var invite = inviteSnap.val();
-      var membershipRef = rootRef.child('index/membership');
-      if(invite) {
-        rootRef.child('users').child(uid).once('value', function(userSnap) {
-          // set user's organization
-          // assign user to a cohort
-          var user = userSnap.val();
-          membershipRef.child(user.uid).child('org').set('andela');
-          userSnap.ref().child('cohort_ref').set(invite.cohort_ref);
-          var cohortRef = new Firebase(invite.cohort_ref);
-          cohortRef.once('value', function(cohortSnap) {
-            var cohort = cohortSnap.val();
-            if(cohort.start_level_ref) {
-              var startLevelRef = new Firebase(cohort.start_level_ref);
-              startLevelRef.child('players').child(uid).child('percent').set(0, function(err) {
-                if(err) {
-                  console.log('couldnt add player to cohort level', err);
-                  res.sendStatus(500);
-                }
-                else {
-                  res.redirect('/home');
-                }
-              });
-            }
-            else {
-              res.redirect('/home');
-            }
-          });
-        });
-      }
-      else {
-        console.log('invite not found', code);
-        res.sendStatus(403);
-      }
+    //create the relationship and add the sender to it
+    var relationshipRef = rootRef.child('relationships').push();
+    relationshipRef.child('members').child(uid).set('new');
+    rootRef.child('users').child(uid).child('relationship_ref').set(relationshipRef.toString());
+
+    //send the email to the invitee
+    var relationshipId = relationshipRef.key();
+    var inviteUrl = req.get('host') + '/invites/' +  relationshipId;
+    var emailBody = 'Hey! You have been invited to keep relationship scores with ' + sender + ' on Nutty Or Nice. Click ' + inviteUrl + ' to join!';
+
+    mg.sendText(config.mailgun.email, recipient,
+      'Relationship Request',
+      emailBody,
+      function(err) {
+        if (err) {
+          console.log('Oh noes: ' + err);
+          res.sendStatus(500);
+        }
+        else {
+          console.log('Success');
+          res.redirect('/home');
+        } 
     });
   });
-
 
   app.get('/admin', function(req, res) {
     var fb_key = process.env.FB_SECRET_KEY || "MNjA9WMCqXkYj9cSotLK0w3Ma5mmjDFo4tAtDxvG";
@@ -138,41 +128,6 @@ function run(appdir) {
         res.sendStatus(403);
       }
     });
-  });
-
-  //Generate cohort invite url
-  app.get('/admin/generate_invite', function(req, res) {
-    var cohortRef = new Firebase(req.query.cohort_ref);
-    var codeExists = req.query.code_exists;
-    var timestamp = t().unix();
-    var hashids = new Hashids('this is my salt beyotch');
-    var newCode = hashids.encode(timestamp);
-    var invitesRef = rootRef.child('organizations').child('andela').child('invites');
-
-    if(codeExists === 'false') {
-      cohortRef.child('invite_code').set(newCode, function() {
-        //TODO refactor this duplicate code
-        invitesRef.child(newCode).child('cohort_ref').set(cohortRef.toString(), function() {
-          cohortRef.child('invite_code').set(newCode, function() {
-            res.sendStatus(200);
-          });
-        });
-      });
-    }
-    else {
-      cohortRef.child('invite_code').once('value', function(inviteSnap) {
-        var inviteCode = inviteSnap.val();
-
-        //delete invite code, generate new one, then update cohort
-        invitesRef.child(inviteCode).remove(function() {
-          invitesRef.child(newCode).child('cohort_ref').set(cohortRef.toString(), function() {
-            cohortRef.child('invite_code').set(newCode, function() {
-              res.sendStatus(200);
-            });
-          });
-        });
-      });
-    }
   });
 
   app.get('/*',function(req, res){
