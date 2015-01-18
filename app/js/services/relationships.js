@@ -12,9 +12,10 @@ angular.module('nuttyOrNice.services')
         }
       },
       addMember: function(uid, user_id, cb) {
-        var relationshipRef = Refs.relationships.child(uid)
+        var relationshipRef = Refs.relationships.child(uid);
         relationshipRef.child('members').child(user_id).set('new', function(){
           Refs.users.child(user_id).child('relationship_ref').set(relationshipRef.toString());
+          cb(relationshipRef.toString());
         });
       },
       save: function(uid, profile, cb) {

@@ -1,4 +1,8 @@
 .main-container(layout="vertical")
-  main(flex)
-    h3 Joining a relationship...
-    md-progress-circular(class="md-accent" md-mode="indeterminate")
+  div(ng-if="!accepting")
+    section.main-page-container
+      a.st-buttons.red#login-button(ng-click="acceptRequest()") Accept Request
+  div(ng-if="accepting")
+    section.main-page-container
+      h3 Accepting relationship request...
+      md-progress-circular(class="md-accent" md-mode="indeterminate")
