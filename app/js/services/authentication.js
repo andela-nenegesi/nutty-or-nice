@@ -5,10 +5,12 @@ angular.module('nuttyOrNice.services')
 
       return {
         login: function(cb) {
+          var self = this;
           var options = { remember: true, scope: "email" };
           Refs.root.authWithOAuthPopup("google", function(error, authData) {
-            if(!error && cb) {
-              cb();
+            if(authData) {
+              console.log('authData', cb);
+              self.auth(authData, cb);
             }
             else {
               console.log('error', error);
@@ -55,8 +57,6 @@ angular.module('nuttyOrNice.services')
                 });
               }
               // save the current user in the global scope
-              $rootScope.currentUser = user;
-              $state.go('default');
             }
             else {
               // construct the user record the way we want it
@@ -65,9 +65,9 @@ angular.module('nuttyOrNice.services')
               userRef.set(user, function(error) {
                 // save the current user in the global scope
                 $rootScope.currentUser = user;
-                $state.go('default');
               });
             }
+            console.log('cb', cb);
             return cb(user);
           });
         },

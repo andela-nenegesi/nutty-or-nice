@@ -39,8 +39,7 @@ angular.module('nuttyOrNice.services')
         var relationshipRef = new Firebase(ref);
         return $firebase(relationshipRef.child(child)).$asArray();    
       },
-      addRecord: function(user, picture, type) {
-        console.log('addNutty', user);
+      addRecord: function(user, picture, type, cb) {
         var relationshipRef = new Firebase(user.relationship_ref);
         var nuttyRefs = relationshipRef.child('members').child(user.uid).child(type);
         var timestamp = moment().unix();
@@ -54,7 +53,9 @@ angular.module('nuttyOrNice.services')
                 created_at: timestamp,
                 picture: picture
               };
-              nuttyRefs.child(user.existing_nutty).child('occurences').push(nutty);
+              nuttyRefs.child(user.existing_nutty).child('occurences').push(nutty, function() {
+                cb(nutty);
+              });
             }
           });
         }
@@ -67,7 +68,9 @@ angular.module('nuttyOrNice.services')
           var nuttyRef = relationshipRef.child(type).push(nutty);
           nutty.description = user.nuttyObj.description;
           nutty.picture = picture;
-          nuttyRefs.child(nuttyRef.key()).child('occurences').push(nutty);
+          nuttyRefs.child(nuttyRef.key()).child('occurences').push(nutty, function() {
+            cb(nutty);
+          });
         }
       },
       save: function(uid, profile, cb) {

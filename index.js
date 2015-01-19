@@ -19,7 +19,7 @@ if(env === 'production') {
   rootRefUrl = "https://nuttyornice-prod.firebaseio.com/";
 }
 else {
-  rootRefUrl = "https://nuttyornice-dev.firebaseio.com/";
+  rootRefUrl = "https://nuttyornice.firebaseio.com/";
 }
 
 function run(appdir) {

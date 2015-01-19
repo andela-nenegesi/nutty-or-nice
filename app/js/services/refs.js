@@ -1,7 +1,7 @@
 angular.module('nuttyOrNice.services')
   .factory('Refs', ['$firebase', '$cookies',
     function($firebase, $cookies) {
-      var rootRef = new Firebase($cookies.rootRef || 'https://nuttyornice-dev.firebaseio.com/');   
+      var rootRef = new Firebase($cookies.rootRef || 'https://nuttyornice.firebaseio.com/');   
       window.rootRef = rootRef;
       
       // define every standard ref used in the application here

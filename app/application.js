@@ -37,19 +37,6 @@ window.NuttyOrNice = angular.module("nuttyOrNice", [
 NuttyOrNice.run(['$rootScope', 'Authorization', 'Authentication', 'Refs', '$location', '$state' ,'toast', function($rootScope, Authorization, Authentication, Refs, $location, $state, toast) {
   $rootScope._ = window._;
   $rootScope.moment = window.moment;
-
-  Refs.root.onAuth(function(authData) {
-    Authentication.auth(authData, function(user) {
-      if(user) {
-        toast("Welcome, " + user.name);
-      }
-      else {
-        // logged out
-        Authentication.logout();
-        $state.go('login');
-      }
-    });
-  });
 }]);
 
 /* application routes */

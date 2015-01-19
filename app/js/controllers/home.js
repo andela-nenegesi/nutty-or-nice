@@ -59,7 +59,9 @@
         };
 
         $scope.recordNutty = function(type) {
-          Relationships.addRecord($scope.selectedUser, $scope.currentUser.picture, type);
+          Relationships.addRecord($scope.selectedUser, $scope.currentUser.picture, type, function(nutty){
+            $scope.selectedUser.nuttys.push(nutty);
+          });
           $mdDialog.hide();
         };
 
@@ -69,7 +71,17 @@
         };
 
         $scope.login = function() {
-          Authentication.login();
+          console.log('this login');
+          Authentication.login(function(user) {
+            if(user) {
+              toast("Welcome, " + user.name);
+            }
+            else {
+              // logged out
+              Authentication.logout();
+              $state.go('login');
+            }
+          });
         };
 
         $scope.init();
