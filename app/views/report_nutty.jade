@@ -1,0 +1,14 @@
+md-dialog.user-dialog
+  md-toolbar(ng-style="{'background-color': cyan}")
+    .md-toolbar-tools
+      p Nutty :(
+  md-content(layout="column" layout-fill)
+    form
+      select(ng-options="nutty.$id as nutty.title for nutty in nuttys" ng-model="selectedUser.existing_nutty" )
+        option(value="") Select From This List or Enter a New Offence
+      div(ng-if="!selectedUser.existing_nutty")
+        md-text-float(label="Short Title" ng-model="selectedUser.nuttyObj.title")
+        md-text-float(label="Punishment" ng-model="selectedUser.nuttyObj.consequence")
+      md-text-float(label="Description" ng-model="selectedUser.nuttyObj.description")
+  .md-actions(layout="row" layout-align="space-around center")
+    md-button.md-primary(ng-click="recordNutty('nuttys')") Save

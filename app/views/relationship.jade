@@ -1,0 +1,35 @@
+md-content(layout="row" layout-fill)
+  md-content(flex="25")
+    md-toolbar(style="height: 50px")
+      .md-toolbar-tools
+        span Your Relationship
+    md-content.md-padding
+      md-list
+        md-item(ng-repeat="member in members")
+          a(href="/home/relationships/{{member.uid}}")
+            .user-list
+              img(ng-src="{{member.picture}}")
+              md-button.md-raised.md-primary.small-text.small-margin(ng-bind="member.name" aria-label="{{member.name}}")
+  md-content(flex="75" layout="column" layout-fill).md-whiteframe-z1
+    md-toolbar(style="height: 50px")
+      div(ng-if="!selectedUser")
+        .md-toolbar-tools
+          span Select A User From the Left Panel
+          span(flex layout="row" layout-align="end center")
+            md-button(ng-click="showBottomSheet($event)")
+              i.fa.fa-ellipsis-v
+      div(ng-if="selectedUser")
+        .md-toolbar-tools
+          img(ng-src="{{selectedUser.picture}}" height="50")
+          span(ng-bind="selectedUser.name" ng-init="user = selectedUser")
+          md-button(class="md-accent md-fab" ng-click="createReport('nice')")
+            i(class="fa fa-heart fa-lg")
+            md-tooltip Has your SO been nice?
+          md-button(class="md-warn md-hue-3 md-fab" ng-click="createReport('nutty')")
+            i(class="fa fa-thumbs-o-down fa-lg")
+            md-tooltip Has your SO been nutty?
+          span(flex layout="row" layout-align="end center")
+            md-button(ng-click="showBottomSheet($event)")
+              i.fa.fa-ellipsis-v
+    div(ng-if="selectedUser")
+      ng-include(src="'views/cards.html'")

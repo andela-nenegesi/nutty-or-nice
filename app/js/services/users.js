@@ -1,6 +1,6 @@
 angular.module('nuttyOrNice.services')
-  .factory('Users', ['$firebase', 'Refs', 'Idx',
-    function($firebase, Refs, Idx) {
+  .factory('Users', ['$firebase', 'Refs',
+    function($firebase, Refs) {
       return {
         all: function(cb) {
           if(!cb) {
@@ -23,54 +23,6 @@ angular.module('nuttyOrNice.services')
             });
           }
         },
-
-        update: function(user, cb) {
-          user.$save().then(function() {
-            Idx.cohortUser(user, cb);
-          });
-        },
-
-        removeFromMembershipAndUsers: function(uid, cb) {
-          //remove user from membership and users collections
-          console.log('revoke membership');
-          Refs.membership.child('uid').remove(function(error) {
-            if(!error) {
-              return Refs.users.child(uid).remove(cb);
-            }
-          });
-        },
-
-        remove: function(uid, cb){
-          console.log('remove called');
-          var self = this;
-          //remove from users table, membership, and level
-          var levelsRef = Refs.levels();
-          levelsRef.once('value', function(levelsSnap) {
-            var playerFound = false;
-            var levels = levelsSnap.val();
-            _.each(levels, function(level, id){
-              var players = level.players;
-              if(players) {
-                if(_.has(players, uid)) {
-                  playerFound = true;
-                  console.log('levelid: ', level, id);
-                  levelsRef.child(id).child('players').child(uid).remove(function(error) {
-                    if(error) {
-                      console.log('Error removing user from level', error);
-                    }
-                    else {
-                      self.removeFromMembershipAndUsers(uid, cb);
-                    }
-                  });
-                }
-              }
-            });
-            if(!playerFound) {
-              //the user is not on any level
-              self.removeFromMembershipAndUsers(uid, cb);
-            }
-          });
-        }
       };
     }
   ]);

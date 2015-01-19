@@ -1,0 +1,14 @@
+div(flex layout="horizontal" layout-sm="horizontal")
+      main(flex)
+        md-toolbar
+          .md-toolbar-tools.extra
+            span.md-flex.settings-header You are lonely :(
+        md-content.md-padding.extra
+          h3 Please enter your significant other's gmail address to invite them
+          form(action="/invite")
+            div(class="row")
+              input(label="Bae's Email" name="email")
+              input(type="hidden" name="uid" value="{{currentUser.uid}}")
+              input(type="hidden" name="name" value="{{currentUser.name}}")
+              .actions
+                md-button.md-raised.md-primary(type="submit") Submit

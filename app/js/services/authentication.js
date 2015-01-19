@@ -7,7 +7,6 @@ angular.module('nuttyOrNice.services')
         login: function(cb) {
           var options = { remember: true, scope: "email" };
           Refs.root.authWithOAuthPopup("google", function(error, authData) {
-            console.log('login callback');
             if(!error && cb) {
               cb();
             }
@@ -41,13 +40,6 @@ angular.module('nuttyOrNice.services')
           }
 
           var self = this;
-
-          // The smarterer controller requires currentUser.uid to be defined on-page-load, prior to the below firebase callback
-          // Administrator accounts will fail because of its `custom` provider property
-          if(authData.provider === 'google') {
-            $rootScope.currentUser = self.buildUserObjectFromGoogle(authData);
-          }
-
 
           // are we dealing with a new user? find out by checking for a user record
           var userRef = Refs.users.child(authData.uid);

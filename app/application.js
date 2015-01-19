@@ -73,15 +73,10 @@ NuttyOrNice.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/home.html',
       controller: 'HomeCtrl'
     })
-    .state('admin/users', {
-      url: '/admin/users',
-      templateUrl: 'views/admin/users.html',
-      controller: 'UsersCtrl'
-    })
-    .state('admin/users/id', {
-      url: '/admin/users/:userId',
-      templateUrl: 'views/admin/users.html',
-      controller: 'UsersCtrl'
+    .state('relationships/id', {
+      url: '/home/relationships/:userId',
+      templateUrl: 'views/home.html',
+      controller: 'HomeCtrl'
     })
     .state('invites', {
       url: '/invites/:relationshipId',

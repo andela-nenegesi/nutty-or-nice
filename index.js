@@ -78,27 +78,30 @@ function run(appdir) {
     var uid = req.query.uid;
 
     //create the relationship and add the sender to it
-    var relationshipRef = rootRef.child('relationships').push();
-    relationshipRef.child('members').child(uid).set('new');
-    rootRef.child('users').child(uid).child('relationship_ref').set(relationshipRef.toString());
+    rootRef.child('users').child(uid).once('value', function(userSnap) {
+      var senderObj = userSnap.val();
+      var relationshipRef = rootRef.child('relationships').push();
+      relationshipRef.child('members').child(uid).set(senderObj);
+      rootRef.child('users').child(uid).child('relationship_ref').set(relationshipRef.toString());
 
-    //send the email to the invitee
-    var relationshipId = relationshipRef.key();
-    var inviteUrl = req.get('host') + '/invites/' +  relationshipId;
-    var emailBody = 'Hey! You have been invited to keep relationship scores with ' + sender + ' on Nutty Or Nice. Click ' + inviteUrl + ' to join!';
+      //send the email to the invitee
+      var relationshipId = relationshipRef.key();
+      var inviteUrl = 'http://' + req.get('host') + '/invites/' +  relationshipId;
+      var emailBody = 'Hey! You have been invited to keep relationship scores with ' + sender + ' on Nutty Or Nice. Click ' + inviteUrl + ' to join!';
 
-    mg.sendText(config.mailgun.email, recipient,
-      'Relationship Request',
-      emailBody,
-      function(err) {
-        if (err) {
-          console.log('Oh noes: ' + err);
-          res.sendStatus(500);
-        }
-        else {
-          console.log('Success');
-          res.redirect('/home');
-        } 
+      mg.sendText(config.mailgun.email, recipient,
+        'Relationship Request',
+        emailBody,
+        function(err) {
+          if (err) {
+            console.log('Oh noes: ' + err);
+            res.sendStatus(500);
+          }
+          else {
+            console.log('Success');
+            res.redirect('/home');
+          } 
+      });
     });
   });
 
