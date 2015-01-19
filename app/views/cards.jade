@@ -14,27 +14,26 @@ md-content.md-padding(flex)
                     h3 {{item.title}}
                     h4 {{item.description}} ooooo
     md-card.nutty-card(flex="47")
-      md-card-content
-        md-toolbar(style="height: 25px")
-          .md-toolbar-tools
-            span Nuttys
-          md-list
-            md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
-              md-item(ng-repeat="($id, item) in nutty.occurences")
-                md-item-content
-                  .md-tile-left
-                      img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
-                  .md-tile-content
-                    h3 {{item.title}}
-                    h4 {{item.description}} ooooo
+      md-toolbar(style="height: 25px")
+        .md-toolbar-tools
+          span Nuttys
+      md-list.scroll
+        md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
+          md-item(ng-repeat="($id, item) in nutty.occurences")
+            md-item-content
+              .md-tile-left
+                  img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
+              .md-tile-content
+                h3 {{item.title}}
+                h4 {{item.description}} ooooo
   md-content(layout="row")
     md-card.nutty-card(flex="47")
       md-toolbar(style="height: 25px")
           .md-toolbar-tools
             span Rewards
           md-list
-            md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
-              md-item(ng-repeat="($id, item) in nutty.occurences")
+            md-item(ng-repeat="($id, nice) in noRelUser.nices")
+              md-item(ng-repeat="($id, item) in nice.occurences")
                 md-item-content
                   .md-tile-left
                       img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")

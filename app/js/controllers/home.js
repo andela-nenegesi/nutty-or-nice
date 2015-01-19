@@ -2,32 +2,39 @@
   'use strict';
   angular.module('nuttyOrNice.controllers')
   .controller('HomeCtrl',
-    ['$scope','$rootScope', '$state', '$stateParams', '$mdDialog', '$mdBottomSheet', 'Authentication', 'Relationships', 'Users',
-      function($scope, $rootScope, $state, $stateParams, $mdDialog, $mdBottomSheet, Authentication, Relationships, Users) {
+    ['$scope', '$timeout', '$rootScope', '$state', '$stateParams', '$mdDialog', '$mdBottomSheet', 'Authentication', 'Relationships', 'Users', 'Refs',
+      function($scope, $timeout, $rootScope, $state, $stateParams, $mdDialog, $mdBottomSheet, Authentication, Relationships, Users, Refs) {
+
+        $scope.checkAuthState = function() {
+          var authData = Refs.root.getAuth();
+          if(authData){
+            Authentication.auth(authData, function(user) {
+              $rootScope.currentUser = user;
+              $scope.init();
+            });
+          }
+          else{
+            $state.go('login');
+          }
+        };
 
         $scope.init = function() {
-          if(!$rootScope.currentUser) {
-            $state.go('login');
-            return;
-          }
-          else {
-            if($rootScope.currentUser.relationship_ref) {
-              if($stateParams.userId) {
-                Relationships.getUser($stateParams.userId, $rootScope.currentUser.relationship_ref, function(user) {
-                  $scope.selectUser(user);
-                });
-              }
-              $scope.relationship = Relationships.getObj($rootScope.currentUser.relationship_ref);
-              $scope.members = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'members');
-              $scope.nuttys = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'nuttys');
-              $scope.nices = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'nices');
+          if($rootScope.currentUser.relationship_ref) {
+            if($stateParams.userId) {
+              Relationships.getUser($stateParams.userId, $rootScope.currentUser.relationship_ref, function(user) {
+                $scope.selectUser(user);
+              });
             }
+            $scope.relationship = Relationships.getObj($rootScope.currentUser.relationship_ref);
+            $scope.members = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'members');
+            $scope.nuttys = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'nuttys');
+            $scope.nices = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'nices');
           }
         };
 
 
         $scope.selectUser = function(user) {
-          $scope.noRelUser = user;
+          $rootScope.noRelUser = user;
           $scope.selectedUser = Users.find($stateParams.userId);
         };
 
@@ -59,8 +66,9 @@
         };
 
         $scope.recordNutty = function(type) {
-          Relationships.addRecord($scope.selectedUser, $scope.currentUser.picture, type, function(nutty){
-            $scope.selectedUser.nuttys.push(nutty);
+          Relationships.addRecord($scope.selectedUser, $rootScope.currentUser.picture, type, function(user){
+            $rootScope.noRelUser = user;
+            window.nuttys = $rootScope.noRelUser.nuttys;
           });
           $mdDialog.hide();
         };
@@ -71,7 +79,6 @@
         };
 
         $scope.login = function() {
-          console.log('this login');
           Authentication.login(function(user) {
             if(user) {
               toast("Welcome, " + user.name);
@@ -84,7 +91,7 @@
           });
         };
 
-        $scope.init();
+        $scope.checkAuthState();
 
       }
    ]);

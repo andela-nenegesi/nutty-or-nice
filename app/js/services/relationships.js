@@ -53,8 +53,11 @@ angular.module('nuttyOrNice.services')
                 created_at: timestamp,
                 picture: picture
               };
-              nuttyRefs.child(user.existing_nutty).child('occurences').push(nutty, function() {
-                cb(nutty);
+              
+              var resultRef = nuttyRefs.child(user.existing_nutty).child('occurences').push(nutty, function() {
+                relationshipRef.child('members').child(user.uid).once('value', function(userSnap) {
+                  cb(userSnap.val());
+                });
               });
             }
           });
@@ -68,8 +71,10 @@ angular.module('nuttyOrNice.services')
           var nuttyRef = relationshipRef.child(type).push(nutty);
           nutty.description = user.nuttyObj.description;
           nutty.picture = picture;
-          nuttyRefs.child(nuttyRef.key()).child('occurences').push(nutty, function() {
-            cb(nutty);
+          var resultRef = nuttyRefs.child(nuttyRef.key()).child('occurences').push(nutty, function() {
+            relationshipRef.child('members').child(user.uid).once('value', function(userSnap) {
+              cb(userSnap.val());
+            });
           });
         }
       },

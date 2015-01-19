@@ -37,6 +37,7 @@ window.NuttyOrNice = angular.module("nuttyOrNice", [
 NuttyOrNice.run(['$rootScope', 'Authorization', 'Authentication', 'Refs', '$location', '$state' ,'toast', function($rootScope, Authorization, Authentication, Refs, $location, $state, toast) {
   $rootScope._ = window._;
   $rootScope.moment = window.moment;
+
 }]);
 
 /* application routes */

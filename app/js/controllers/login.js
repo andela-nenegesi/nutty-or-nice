@@ -1,6 +1,6 @@
 angular.module('nuttyOrNice.controllers')
-.controller('LoginCtrl', ['$scope', 'Authentication', 'toast',
-  function($scope, Authentication, toast) {
+.controller('LoginCtrl', ['$scope', '$state', 'Authentication', 'toast',
+  function($scope, $state, Authentication, toast) {
     $scope.login = function() {
       Authentication.login(function(user) {
         if(user) {

@@ -9,7 +9,6 @@ angular.module('nuttyOrNice.services')
           var options = { remember: true, scope: "email" };
           Refs.root.authWithOAuthPopup("google", function(error, authData) {
             if(authData) {
-              console.log('authData', cb);
               self.auth(authData, cb);
             }
             else {
@@ -57,6 +56,7 @@ angular.module('nuttyOrNice.services')
                 });
               }
               // save the current user in the global scope
+              $rootScope.currentUser = user;
             }
             else {
               // construct the user record the way we want it
@@ -67,7 +67,6 @@ angular.module('nuttyOrNice.services')
                 $rootScope.currentUser = user;
               });
             }
-            console.log('cb', cb);
             return cb(user);
           });
         },
