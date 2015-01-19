@@ -16,10 +16,10 @@ var FirebaseTokenGenerator = require("firebase-token-generator"),
   rootRefUrl;
 
 if(env === 'production') {
-  rootRefUrl = "https://nuttyornice.firebaseio.com/";
+  rootRefUrl = "https://nuttyornice-prod.firebaseio.com/";
 }
 else {
-  rootRefUrl = "https://nuttyornice.firebaseio.com/";
+  rootRefUrl = "https://nuttyornice-dev.firebaseio.com/";
 }
 
 function run(appdir) {
