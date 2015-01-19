@@ -12,8 +12,8 @@
           Authentication.login(function() {
             Relationships.find($stateParams.relationshipId, function(relationshipRef){
               //do somn, add user to relationsjip and add relationship ref to user
-              Relationships.addMember($stateParams.relationshipId, $scope.currentUser.uid, function(relationshipRef){
-                $scope.currentUser.relationship_ref = relationshipRef;
+              Relationships.addMember($stateParams.relationshipId, $rootScope.currentUser.uid, function(relationshipRef){
+                $rootScope.currentUser.relationship_ref = relationshipRef;
                 toast('You are now in a relationship!');
               });
             });
