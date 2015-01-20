@@ -3,12 +3,12 @@ md-dialog.user-dialog
     .md-toolbar-tools
       p Nice :)
   md-content(layout="column" layout-fill)
-    form
+    form(name="form")
       select(ng-options="nice.$id as nice.title for nice in nices" ng-model="selectedUser.existing_nutty" )
         option(value="") Select From This List or Enter a New Nice Thing
       div(ng-if="!selectedUser.existing_nutty")
-        md-text-float(label="Short Title" ng-model="selectedUser.nuttyObj.title")
-        md-text-float(label="Reward" ng-model="selectedUser.nuttyObj.consequence")
-      md-text-float(label="Description" ng-model="selectedUser.nuttyObj.description")
+        md-text-float(label="Short Title" ng-model="selectedUser.nuttyObj.title" required)
+        md-text-float(label="Reward" ng-model="selectedUser.nuttyObj.consequence" required)
+      md-text-float(label="Description of this occurence" ng-model="selectedUser.nuttyObj.description" required)
   .md-actions(layout="row" layout-align="space-around center")
-    md-button.md-primary(ng-click="recordNutty('nices')") Save
+    md-button.md-primary(ng-click="recordNutty('nices')" ng-disabled="!form.$valid") Save
