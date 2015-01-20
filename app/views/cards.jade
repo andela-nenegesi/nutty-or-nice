@@ -12,7 +12,8 @@ md-content.md-padding(flex)
                   img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
               .md-tile-content
                 h3 {{item.title}}
-                h4 {{item.description}} ooooo
+                h4 {{item.description}}
+          md-divider(ng-if="!$last")
     md-card.nutty-card(flex="47")
       md-toolbar(style="height: 25px")
         .md-toolbar-tools
@@ -25,7 +26,8 @@ md-content.md-padding(flex)
                   img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
               .md-tile-content
                 h3 {{item.title}}
-                h4 {{item.description}} ooooo
+                h4 {{item.description}}
+          md-divider(ng-if="!$last")
   md-content(layout="row")
     md-card.nutty-card(flex="47")
       md-toolbar(style="height: 25px")
@@ -39,6 +41,7 @@ md-content.md-padding(flex)
                   img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
               .md-tile-content
                 h3 {{item.consequence}}
+          md-divider(ng-if="!$last")                
     md-card.nutty-card(flex="47")
       md-toolbar(style="height: 25px")
           .md-toolbar-tools
@@ -51,3 +54,4 @@ md-content.md-padding(flex)
                   img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
               .md-tile-content
                 h3 {{item.consequence}}
+          md-divider(ng-if="!$last")                
