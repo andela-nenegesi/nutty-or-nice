@@ -9,8 +9,10 @@
           var authData = Refs.root.getAuth();
           if(authData){
             Authentication.auth(authData, function(user) {
-              $rootScope.currentUser = user;
-              $scope.init();
+              $scope.$apply(function() {
+                $rootScope.currentUser = user;
+                $scope.init();
+              });
             });
           }
           else{
@@ -29,6 +31,10 @@
                 $scope.selectUser(user);
               }
             });
+          }
+          else {
+            //ask user to select relationship
+            $scope.switch({clickOutsideToClose: false, escapeToClose: false});
           }
         };
 
@@ -90,11 +96,9 @@
               $scope.addMember = function() {
                 $http.post('/invite', $scope.data).
                   success(function(data, status, headers, config) {
-                    console.log('success');
                     $mdDialog.hide();
                   }).
                   error(function(data, status, headers, config) {
-                    console.log('failed');
                     $mdDialog.hide();
                   });
               }
@@ -109,7 +113,7 @@
           });
         };
 
-        $scope.switch = function() {
+        $scope.switch = function(ops) {
           $mdDialog.show({
             controller: ['$scope', 'Relationships', function($scope, Relationships) {
               $scope.currentUser = $rootScope.currentUser;
@@ -128,6 +132,8 @@
             }],
             locals: {
             },
+            clickOutsideToClose: ops.clickOutsideToClose || true,
+            escapeToClose: ops.escapeToClose || true,
             templateUrl: 'views/user_relationships.html'
           }).then(function(action){
 

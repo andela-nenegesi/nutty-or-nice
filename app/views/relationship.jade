@@ -6,7 +6,7 @@ md-content(layout="row" layout-fill)
     md-content.md-padding
       md-list
         md-item(ng-repeat="member in relationship.members")
-          a(href="/home/relationships/{{member.uid}}")
+          a(href="/home/{{relationship.$id}}/{{member.uid}}")
             .user-list
               img(ng-src="{{member.picture}}")
               md-button.md-raised.md-primary.small-text.small-margin(ng-bind="member.name" aria-label="{{member.name}}")

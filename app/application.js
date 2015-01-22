@@ -38,12 +38,13 @@ NuttyOrNice.run(['$rootScope', 'Authorization', 'Authentication', 'Refs', '$loca
   $rootScope._ = window._;
   $rootScope.moment = window.moment;
 
-  var authData = Refs.root.getAuth();
-  if(authData){
-    Authentication.auth(authData, function(user) {
-      $rootScope.currentUser = user;
-    });
-  }
+  Refs.root.onAuth(function(authData) {
+    if (authData) {
+      Authentication.auth(authData, function(user) {
+        $rootScope.currentUser = user;
+      });
+    }
+  });
 
 }]);
 

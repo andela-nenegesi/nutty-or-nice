@@ -1,11 +1,27 @@
 md-dialog.user-dialog
-  md-content
-    md-content(layout="column" layout-fill)
-      md-toolbar(style="height: 50px")
-        .md-toolbar-tools
-          span Select A Relationship
+  div(layout="horizontal" layout-sm="horizontal")
+    main(flex)
+      md-toolbar
+        .md-toolbar-tools.extra
+          span.md-flex.settings-header Select A Relationship
       md-content.md-padding
         md-list
           md-item(ng-repeat="relationship in relationships")
-              .user-list
-                md-button.md-raised.md-primary.small-text.small-margin(ng-bind="relationship.name" aria-label="{{relationship.name}}" ng-click="goto(relationship.$id)")
+            .user-list
+              md-button.md-raised.md-primary.small-margin(ng-bind="relationship.name" aria-label="{{relationship.name}}" ng-click="goto(relationship.$id)")
+      md-content(layout="row" layout-align="end center")
+        md-button.md-raised.md-accent.small-margin Create One
+
+//- md-dialog.user-dialog
+//-   div(layout="horizontal" layout-sm="horizontal")
+//-     main(flex)
+//-       md-toolbar
+//-         .md-toolbar-tools.extra
+//-           span.md-flex.settings-header Wanna grow your relationship?!?
+//-       md-content.md-padding.extra
+//-         h3 Please potential member's gmail address to invite them
+//-         form
+//-           div(class="row")
+//-             input(label="Bae's Email" name="email" ng-model="data.email")
+//-             .actions
+//-               md-button.md-raised.md-primary(ng-click="addMember()") Submit
