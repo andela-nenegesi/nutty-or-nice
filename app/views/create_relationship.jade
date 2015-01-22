@@ -1,0 +1,11 @@
+md-content(layout="row" layout-align="center center")
+  div(flex="50")
+    div(layout="column", layout-fill)
+      md-toolbar
+        .md-toolbar-tools.extra
+          span.settings-header You are lonely :(
+      md-content(layout="column" layout-fill)
+        form(name="form")
+            md-text-float(label="Relationship Name (should be short)" ng-model="newRelationship.name" required)
+          .md-actions(layout="row" layout-align="space-around center")
+            md-button.md-primary(ng-click="createRelationship()" ng-disabled="!form.$valid") Create

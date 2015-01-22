@@ -1,0 +1,13 @@
+md-dialog.user-dialog
+  div(layout="horizontal" layout-sm="horizontal")
+    main(flex)
+      md-toolbar
+        .md-toolbar-tools.extra
+          span.md-flex.settings-header Wanna grow your relationship?!?
+      md-content.md-padding.extra
+        h3 Please potential member's gmail address to invite them
+        form
+          div(class="row")
+            input(label="Bae's Email" name="email" ng-model="data.email")
+            .actions
+              md-button.md-raised.md-primary(ng-click="addMember()") Submit

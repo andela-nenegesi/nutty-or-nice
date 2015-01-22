@@ -38,6 +38,13 @@ NuttyOrNice.run(['$rootScope', 'Authorization', 'Authentication', 'Refs', '$loca
   $rootScope._ = window._;
   $rootScope.moment = window.moment;
 
+  var authData = Refs.root.getAuth();
+  if(authData){
+    Authentication.auth(authData, function(user) {
+      $rootScope.currentUser = user;
+    });
+  }
+
 }]);
 
 /* application routes */
@@ -61,13 +68,18 @@ NuttyOrNice.config(['$stateProvider','$locationProvider',
       templateUrl: 'views/home.html',
       controller: 'HomeCtrl'
     })
-    .state('relationships/id', {
-      url: '/home/relationships/:userId',
+    .state('relationships', {
+      url: '/home/:relId',
+      templateUrl: 'views/home.html',
+      controller: 'HomeCtrl'
+    })
+    .state('relationships/user', {
+      url: '/home/:relId/:userId',
       templateUrl: 'views/home.html',
       controller: 'HomeCtrl'
     })
     .state('invites', {
-      url: '/invites/:relationshipId',
+      url: '/invites/:relId',
       templateUrl: 'views/join.html',
       controller: 'JoinCtrl'
     })

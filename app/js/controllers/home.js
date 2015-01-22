@@ -2,8 +2,8 @@
   'use strict';
   angular.module('nuttyOrNice.controllers')
   .controller('HomeCtrl',
-    ['$scope', '$timeout', '$rootScope', '$state', '$stateParams', '$mdDialog', '$mdBottomSheet', 'Authentication', 'Relationships', 'Users', 'Refs',
-      function($scope, $timeout, $rootScope, $state, $stateParams, $mdDialog, $mdBottomSheet, Authentication, Relationships, Users, Refs) {
+    ['$scope', 'toast', '$timeout', '$rootScope', '$state', '$stateParams', '$mdDialog', '$mdBottomSheet', 'Authentication', 'Relationships', 'Users', 'Refs',
+      function($scope, toast, $timeout, $rootScope, $state, $stateParams, $mdDialog, $mdBottomSheet, Authentication, Relationships, Users, Refs) {
 
         $scope.checkAuthState = function() {
           var authData = Refs.root.getAuth();
@@ -19,17 +19,33 @@
         };
 
         $scope.init = function() {
-          if($rootScope.currentUser.relationship_ref) {
-            if($stateParams.userId) {
-              Relationships.getUser($stateParams.userId, $rootScope.currentUser.relationship_ref, function(user) {
+          $scope.newRelationship = {};
+          if($stateParams.relId) {
+            console.log('yes params');
+            $scope.relationship = Relationships.find($stateParams.relId);
+            Relationships.find($stateParams.relId, function(rel) {
+              if(rel && $stateParams.userId) {
+                var user = rel.members[$stateParams.userId];
                 $scope.selectUser(user);
-              });
-            }
-            $scope.relationship = Relationships.getObj($rootScope.currentUser.relationship_ref);
-            $scope.members = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'members');
-            $scope.nuttys = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'nuttys');
-            $scope.nices = Relationships.getChildArray($rootScope.currentUser.relationship_ref, 'nices');
+              }
+            });
           }
+        };
+
+        $scope.createRelationship = function() {
+          var rel = Relationships.create($scope.newRelationship.name, $rootScope.currentUser);
+          Refs.users.child($rootScope.currentUser.uid).child('relationships').push(rel.key());
+          if($rootScope.currentUser.relationships) {
+            $rootScope.currentUser.relationships[rel.key()] = rel.key();
+          }
+          else {
+            var obj = {};
+            obj[rel.key()] = rel.key();
+            $rootScope.currentUser.relationships = obj; 
+          }
+          toast('Relationship ' + $scope.newRelationship.name + ' created :)', null, null, function() {
+            $state.go("relationships", {relId: rel.key()});
+          });
         };
 
 
@@ -58,6 +74,61 @@
               percent: $scope.percent,
             },
             templateUrl: type === 'nutty' ? 'views/report_nutty.html' : 'views/report_nice.html'
+          }).then(function(action){
+
+          }, function() {
+
+          });
+        };
+
+        $scope.invite = function() {
+          $mdDialog.show({
+            controller: ['$scope', '$stateParams', '$http', function($scope, $stateParams, $http) {
+              $scope.data = {};
+              $scope.data.relId = $stateParams.relId;
+              $scope.data.sender = $rootScope.currentUser.name;
+              $scope.addMember = function() {
+                $http.post('/invite', $scope.data).
+                  success(function(data, status, headers, config) {
+                    console.log('success');
+                    $mdDialog.hide();
+                  }).
+                  error(function(data, status, headers, config) {
+                    console.log('failed');
+                    $mdDialog.hide();
+                  });
+              }
+            }],
+            locals: {
+            },
+            templateUrl: 'views/in_rel_invite.html'
+          }).then(function(action){
+
+          }, function() {
+
+          });
+        };
+
+        $scope.switch = function() {
+          $mdDialog.show({
+            controller: ['$scope', 'Relationships', function($scope, Relationships) {
+              $scope.currentUser = $rootScope.currentUser;
+              //how to get all relationships for a user
+              $scope.relationships = [];
+              _.each($scope.currentUser.relationships, function(val, key) {
+                Relationships.find(val, function(obj) {
+                  $scope.relationships.push(obj);
+                });
+              });
+
+              $scope.goto = function(relId) {
+                $state.go('relationships', {relId: relId});
+                $mdDialog.hide();
+              }
+            }],
+            locals: {
+            },
+            templateUrl: 'views/user_relationships.html'
           }).then(function(action){
 
           }, function() {
