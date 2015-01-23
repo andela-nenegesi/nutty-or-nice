@@ -5,7 +5,7 @@ md-content.md-padding(flex)
           .md-toolbar-tools
             span Nices
       .md-list.scroll
-        md-item(ng-repeat="($id, nice) in noRelUser.nices")
+        md-item(ng-repeat="($id, nice) in noRelUser.nices | orderObjectBy:'created_at':true")
           md-item-content
             .md-tile-left
                 img.face(ng-src="{{nice.picture}}" alt="{{noRelUser.name}}")
@@ -32,7 +32,7 @@ md-content.md-padding(flex)
           .md-toolbar-tools
             span Rewards
       .md-list.scroll
-        md-item(ng-repeat="($id, nice) in noRelUser.nices")
+        md-item(ng-repeat="($id, nice) in noRelUser.nices | orderObjectBy:'created_at':true")
           md-item-content
             .md-tile-left
                 img.face(ng-src="{{nice.picture}}" alt="{{noRelUser.name}}")
@@ -44,7 +44,7 @@ md-content.md-padding(flex)
           .md-toolbar-tools
             span Punishments
       .md-list.scroll
-        md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
+        md-item(ng-repeat="($id, nutty) in noRelUser.nuttys | orderObjectBy:'created_at':true")
           md-item-content
             .md-tile-left
                 img.face(ng-src="{{nutty.picture}}" alt="{{noRelUser.name}}")
