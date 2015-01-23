@@ -51,8 +51,8 @@ angular.module('nuttyOrNice.services')
         return $firebase(relationshipRef.child(child)).$asArray();    
       },
 
-      addRecord: function(user, picture, type, cb) {
-        var relationshipRef = new Firebase(user.relationship_ref);
+      addRecord: function(relId, user, picture, type, cb) {
+        var relationshipRef = Refs.relationships.child(relId);
         var nuttyRefs = relationshipRef.child('members').child(user.uid).child(type);
         var timestamp = moment().unix();
         if(user.existing_nutty) {

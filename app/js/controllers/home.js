@@ -145,9 +145,8 @@
         };
 
         $scope.recordNutty = function(type) {
-          Relationships.addRecord($scope.selectedUser, $rootScope.currentUser.picture, type, function(user){
+          Relationships.addRecord($scope.relationship.$id, $scope.selectedUser, $rootScope.currentUser.picture, type, function(user){
             $rootScope.noRelUser = user;
-            window.nuttys = $rootScope.noRelUser.nuttys;
           });
           $mdDialog.hide();
         };
@@ -174,10 +173,16 @@
         Refs.root.onAuth(function(authData) {
           if(authData){
             Authentication.auth(authData, function(user) {
-              $rootScope.$apply(function() {
+              if(!$rootScope.$$phase) {
+                $rootScope.$apply(function() {
+                  $rootScope.currentUser = user;
+                  $scope.init();
+                });
+              }
+              else {
                 $rootScope.currentUser = user;
                 $scope.init();
-              });
+              }
             });
           }
           else{

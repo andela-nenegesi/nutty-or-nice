@@ -20,7 +20,7 @@ md-content.md-padding(flex)
           span Nuttys
       .md-list.scroll
         md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
-          md-item(ng-repeat="($id, item) in nutty.occurences")
+          md-item(ng-repeat="($id, item) in nutty.occurences | orderBy:item.created_at:reverse")
             md-item-content
               .md-tile-left
                   img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
