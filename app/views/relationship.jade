@@ -26,10 +26,10 @@ md-content(layout="row" layout-fill)
           span(ng-bind="selectedUser.name" ng-init="user = selectedUser")
           md-button(class="md-accent md-fab" ng-click="createReport('nice')")
             i(class="fa fa-heart fa-lg")
-            md-tooltip Has your SO been nice?
+            md-tooltip Has {{selectedUser.first_name}} been nice?
           md-button(class="md-warn md-hue-3 md-fab" ng-click="createReport('nutty')")
             i(class="fa fa-thumbs-o-down fa-lg")
-            md-tooltip Has your SO been nutty?
+            md-tooltip Has {{selectedUser.first_name}} been nutty?
           span(flex layout="row" layout-align="end center")
             md-button(ng-click="showBottomSheet($event)")
               i.fa.fa-ellipsis-v
