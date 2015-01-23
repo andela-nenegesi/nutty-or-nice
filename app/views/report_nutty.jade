@@ -4,7 +4,7 @@ md-dialog.user-dialog
       p Nutty :(
   md-content(layout="column" layout-fill)
     form(name="form")
-      select(ng-options="nutty.$id as nutty.title for nutty in nuttys" ng-model="selectedUser.existing_nutty" )
+      select(ng-options="$id as nutty.title for ($id, nutty) in relationship.nuttys" ng-model="selectedUser.existing_nutty" )
         option(value="") Select From This List or Enter a New Offence
       div(ng-if="!selectedUser.existing_nutty")
         md-text-float(label="Short Title" ng-model="selectedUser.nuttyObj.title" required)

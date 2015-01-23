@@ -14,7 +14,7 @@
                   .then(function(relObj) {
                     var user = relObj.members[$stateParams.userId];
                     $scope.selectUser(user);
-                  })
+                  });
               }
             });
           }

@@ -1,0 +1,123 @@
+{
+  "relationships" : {
+    "-Jg7rwd892DHoiqJqsph" : {
+      "members" : {
+        "google:101059079764242874099" : {
+          "access_token" : "ya29.AQHbB7t3aDMmT2gxlBUZ5lF08rq5nX6Ae4wiSv_WgEUND-72zd5dQOmBF-Iw_I5iz9o5EMlz13HzPA",
+          "created_at" : 1421783854255,
+          "email" : "blaesergina@gmail.com",
+          "first_name" : "Gina",
+          "known_as" : "Gina",
+          "last_name" : "Blaeser",
+          "name" : "Gina Blaeser",
+          "nices" : {
+            "-Jg7wjBxejlpFYTxDX1u" : {
+              "id" : "Jg7wjBtUksY4vV1gK5t",
+              "consequence" : "A gold crown",
+              "created_at" : 1421784314,
+              "description" : "Always graceful and a straight up boss",
+              "picture" : "https://lh5.googleusercontent.com/-t7T5HVc54GE/AAAAAAAAAAI/AAAAAAAAAIE/eqWKSUQGMx8/photo.jpg",
+              "title" : "Queen 604"
+            }
+          },
+          "nuttys" : {
+            "-Jg7vRYr5J1yBavpBO2i" : {
+              "id" : "Jg7vRYr5J1yBavpBO2i",
+              "consequence" : "2 spanks on left butt cheek",
+              "created_at" : 1421783976,
+              "description" : "Always being sassy",
+              "picture" : "https://lh3.googleusercontent.com/-vEEVDXgoh8w/AAAAAAAAAAI/AAAAAAAAACY/AHl4Sqm9Ngk/photo.jpg",
+              "title" : "Sassy McGee"
+            },
+            "-Jg8iC5L9wV3TU8_Fo8p" : {
+              "id" : "Jg8iC5L9wV3TU8_Fo8p",
+              "consequence" : "no trip to have dinner with Kanye",
+              "created_at" : 1421797281,
+              "description" : "Self-love to the 30th degree",
+              "picture" : "https://lh3.googleusercontent.com/-vEEVDXgoh8w/AAAAAAAAAAI/AAAAAAAAACY/AHl4Sqm9Ngk/photo.jpg",
+              "title" : "Kanye"
+            }
+          },
+          "picture" : "https://lh5.googleusercontent.com/-t7T5HVc54GE/AAAAAAAAAAI/AAAAAAAAAIE/eqWKSUQGMx8/photo.jpg",
+          "uid" : "google:101059079764242874099"
+        },
+        "google:111678367057889164338" : {
+          "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6Imdvb2dsZToxMTE2NzgzNjcwNTc4ODkxNjQzMzgiLCJwcm92aWRlciI6Imdvb2dsZSJ9LCJpYXQiOjE0MjE3ODI5Mzd9.VMNVrUSJr3cmBDIo_MnQYkLS9K7hbwgd4ckcCpz0at4",
+          "created_at" : 1421681013640,
+          "email" : "nenegesi@gmail.com",
+          "first_name" : "Nadayar",
+          "known_as" : "Nadayar",
+          "last_name" : "Enegesi",
+          "name" : "Nadayar Enegesi",
+          "nuttys" : {
+            "-JgIJGeINYOB-XWB0EFO" : {
+              "id" : "-JgIJGeINYOB-XWB0EFO",
+              "consequence" : "1 slap in the face.",
+              "created_at" : 1421958257,
+              "description" : "Continues making inappropriate references/comments to my curling iron, stating it \"looks like a dildo.\" Has documented a picture of myself holding the curling iron and has not deleted it upon request.",
+              "picture" : "https://lh5.googleusercontent.com/-t7T5HVc54GE/AAAAAAAAAAI/AAAAAAAAAIE/eqWKSUQGMx8/photo.jpg",
+              "title" : "Dildo?"
+            }
+          },
+          "picture" : "https://lh3.googleusercontent.com/-vEEVDXgoh8w/AAAAAAAAAAI/AAAAAAAAACY/AHl4Sqm9Ngk/photo.jpg",
+          "uid" : "google:111678367057889164338"
+        }
+      },
+      "name" : "The Future",
+      "nices" : {
+        "-Jg7wjBtUksY4vV1gK5t" : {
+          "consequence" : "A gold crown",
+          "created_at" : 1421784314,
+          "title" : "Queen 604"
+        }
+      },
+      "nuttys" : {
+        "-Jg7vRYr5J1yBavpBO2i" : {
+          "consequence" : "2 spanks on left butt cheek",
+          "created_at" : 1421783976,
+          "title" : "Sassy McGee"
+        },
+        "-Jg8iC5L9wV3TU8_Fo8p" : {
+          "consequence" : "no trip to have dinner with Kanye",
+          "created_at" : 1421797281,
+          "title" : "Kanye"
+        },
+        "-JgIJGeINYOB-XWB0EFO" : {
+          "consequence" : "1 slap in the face.",
+          "created_at" : 1421958257,
+          "title" : "Dildo?"
+        }
+      }
+    }
+  },
+  "users" : {
+    "google:101059079764242874099" : {
+      "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6Imdvb2dsZToxMDEwNTkwNzk3NjQyNDI4NzQwOTkiLCJwcm92aWRlciI6Imdvb2dsZSJ9LCJpYXQiOjE0MjIwNDgxODl9.5WAn_xxhd2E__U6491JVFkiwl4Mo2bEKe23rrOBQtKs",
+      "created_at" : 1421783854255,
+      "email" : "blaesergina@gmail.com",
+      "first_name" : "Gina",
+      "known_as" : "Gina",
+      "last_name" : "Blaeser",
+      "name" : "Gina Blaeser",
+      "picture" : "https://lh5.googleusercontent.com/-t7T5HVc54GE/AAAAAAAAAAI/AAAAAAAAAIE/eqWKSUQGMx8/photo.jpg",
+      "relationships" : {
+        "Jg7rwd892DHoiqJqsph" : "Jg7rwd892DHoiqJqsph"
+      },
+      "uid" : "google:101059079764242874099"
+    },
+    "google:111678367057889164338" : {
+      "access_token" : "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ2IjowLCJkIjp7InVpZCI6Imdvb2dsZToxMTE2NzgzNjcwNTc4ODkxNjQzMzgiLCJwcm92aWRlciI6Imdvb2dsZSJ9LCJpYXQiOjE0MjIwMDY1ODJ9.NnnyWzPw3FK3aTfyPocmLaa7VTWB0CrjmS9h_nTeL5U",
+      "created_at" : 1421681013640,
+      "email" : "nenegesi@gmail.com",
+      "first_name" : "Nadayar",
+      "known_as" : "Nadayar",
+      "last_name" : "Enegesi",
+      "name" : "Nadayar Enegesi",
+      "picture" : "https://lh3.googleusercontent.com/-vEEVDXgoh8w/AAAAAAAAAAI/AAAAAAAAACY/AHl4Sqm9Ngk/photo.jpg",
+      "relationships" : {
+        "Jg7rwd892DHoiqJqsph" : "Jg7rwd892DHoiqJqsph"
+      },
+      "uid" : "google:111678367057889164338"
+    }
+  }
+}

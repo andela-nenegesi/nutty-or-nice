@@ -6,27 +6,25 @@ md-content.md-padding(flex)
             span Nices
       .md-list.scroll
         md-item(ng-repeat="($id, nice) in noRelUser.nices")
-          md-item(ng-repeat="($id, item) in nice.occurences")
-            md-item-content
-              .md-tile-left
-                  img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
-              .md-tile-content
-                h3 {{item.title}}
-                h4 {{item.description}}
+          md-item-content
+            .md-tile-left
+                img.face(ng-src="{{nice.picture}}" alt="{{noRelUser.name}}")
+            .md-tile-content
+              h3 {{nice.title}}
+              h4 {{nice.description}}
           md-divider(ng-if="!$last")
     md-card.nutty-card(flex="47")
       md-toolbar(style="height: 25px")
         .md-toolbar-tools
           span Nuttys
       .md-list.scroll
-        md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
-          md-item(ng-repeat="($id, item) in nutty.occurences | orderBy:item.created_at:reverse")
-            md-item-content
-              .md-tile-left
-                  img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
-              .md-tile-content
-                h3 {{item.title}}
-                h4 {{item.description}}
+        md-item(ng-repeat="($id, nutty) in noRelUser.nuttys | orderObjectBy:'created_at':true")
+          md-item-content
+            .md-tile-left
+                img.face(ng-src="{{nutty.picture}}" alt="{{noRelUser.name}}")
+            .md-tile-content
+              h3 {{nutty.title}}
+              h4 {{nutty.created_at}}
           md-divider(ng-if="!$last")
   md-content(layout="row")
     md-card.nutty-card(flex="47")
@@ -35,12 +33,11 @@ md-content.md-padding(flex)
             span Rewards
       .md-list.scroll
         md-item(ng-repeat="($id, nice) in noRelUser.nices")
-          md-item(ng-repeat="($id, item) in nice.occurences")
-            md-item-content
-              .md-tile-left
-                  img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
-              .md-tile-content
-                h3 {{item.consequence}}
+          md-item-content
+            .md-tile-left
+                img.face(ng-src="{{nice.picture}}" alt="{{noRelUser.name}}")
+            .md-tile-content
+              h3 {{nice.consequence}}
           md-divider(ng-if="!$last")                
     md-card.nutty-card(flex="47")
       md-toolbar(style="height: 25px")
@@ -48,10 +45,9 @@ md-content.md-padding(flex)
             span Punishments
       .md-list.scroll
         md-item(ng-repeat="($id, nutty) in noRelUser.nuttys")
-          md-item(ng-repeat="($id, item) in nutty.occurences")
-            md-item-content
-              .md-tile-left
-                  img.face(ng-src="{{item.picture}}" alt="{{noRelUser.name}}")
-              .md-tile-content
-                h3 {{item.consequence}}
+          md-item-content
+            .md-tile-left
+                img.face(ng-src="{{nutty.picture}}" alt="{{noRelUser.name}}")
+            .md-tile-content
+              h3 {{nutty.consequence}}
           md-divider(ng-if="!$last")                

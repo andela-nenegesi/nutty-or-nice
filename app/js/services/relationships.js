@@ -59,6 +59,7 @@ angular.module('nuttyOrNice.services')
           relationshipRef.child(type).child(user.existing_nutty).once('value', function(snap) {
             if(snap.val()) {
               var nutty = {
+                id: snap.key(),
                 title: snap.val().title,
                 consequence: snap.val().consequence,
                 description: user.nuttyObj.description, 
@@ -66,7 +67,7 @@ angular.module('nuttyOrNice.services')
                 picture: picture
               };
               
-              var resultRef = nuttyRefs.child(user.existing_nutty).child('occurences').push(nutty, function() {
+              nuttyRefs.push(nutty, function() {
                 relationshipRef.child('members').child(user.uid).once('value', function(userSnap) {
                   cb(userSnap.val());
                 });
@@ -83,7 +84,8 @@ angular.module('nuttyOrNice.services')
           var nuttyRef = relationshipRef.child(type).push(nutty);
           nutty.description = user.nuttyObj.description;
           nutty.picture = picture;
-          var resultRef = nuttyRefs.child(nuttyRef.key()).child('occurences').push(nutty, function() {
+          nutty.id = nuttyRef.key();
+          nuttyRefs.push(nutty, function() {
             relationshipRef.child('members').child(user.uid).once('value', function(userSnap) {
               cb(userSnap.val());
             });

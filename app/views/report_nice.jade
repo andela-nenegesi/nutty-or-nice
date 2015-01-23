@@ -4,7 +4,7 @@ md-dialog.user-dialog
       p Nice :)
   md-content(layout="column" layout-fill)
     form(name="form")
-      select(ng-options="nice.$id as nice.title for nice in nices" ng-model="selectedUser.existing_nutty" )
+      select(ng-options="$id as nice.title for ($id, nice) for nice in relationship.nices" ng-model="selectedUser.existing_nutty" )
         option(value="") Select From This List or Enter a New Nice Thing
       div(ng-if="!selectedUser.existing_nutty")
         md-text-float(label="Short Title" ng-model="selectedUser.nuttyObj.title" required)

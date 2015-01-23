@@ -16,6 +16,7 @@ require('./js/services/users.js');
 
 /* load directives */
 require('./js/directives/levels.js');
+require('./js/filters/objectfilter.js');
 
 /* load controllers */
 require('./js/controllers/bottom-sheet.js');
