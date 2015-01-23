@@ -11,7 +11,7 @@ md-content(layout="row" layout-fill)
               img(ng-src="{{member.picture}}")
               md-button.md-raised.md-primary.small-text.small-margin(ng-bind="member.name" aria-label="{{member.name}}")
       md-button.md-raised.md-accent.small-text.small-margin(ng-click="invite()") Invite New Member!
-      md-button.md-raised.md-accent.small-text(ng-click="switch()") Switch Relationships
+      md-button.md-raised.md-accent.small-text(ng-click="switch(true)") Switch Relationships
   md-content(flex="75" layout="column" layout-fill).md-whiteframe-z1
     md-toolbar(style="height: 50px")
       div(ng-if="!selectedUser")

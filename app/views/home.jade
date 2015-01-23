@@ -1,13 +1,10 @@
 md-content.md-default-theme.no-bg(layout="column" layout-fill)
-  div(ng-if="currentUser.relationships")
-    ng-include(src="'views/relationship.html'")
-  div(ng-if="!currentUser.relationships")
-    md-toolbar#home-toolbar
-      .md-toolbar-tools
-        span.title NuttyOrNice?
-        span(flex layout="row" layout-align="end center" ng-if="currentUser")
-          md-button(ng-click="showBottomSheet($event)")
-            i.fa.fa-ellipsis-v
-      md-content(style="padding-top: 10px")
-        ng-include(src="'views/create_relationship.html'")
+  ng-include(src="'views/relationship.html'")
+  //- div(ng-if="!currentUser.relationships")
+  //-   md-toolbar#home-toolbar
+  //-     .md-toolbar-tools
+  //-       span.title NuttyOrNice?
+  //-       span(flex layout="row" layout-align="end center" ng-if="currentUser")
+  //-         md-button(ng-click="showBottomSheet($event)")
+  //-           i.fa.fa-ellipsis-v
       
